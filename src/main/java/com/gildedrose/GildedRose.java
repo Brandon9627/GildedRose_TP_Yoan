@@ -8,63 +8,56 @@ class GildedRose {
     }
 
     public void updateQuality() {
+
         for (Item item : items) {
-            if (!item.name.equals("Aged Brie") && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (item.quality > 0) {
-                    if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                        item.quality = item.quality - 1;
-                        if (item.name.equals("Conjured")){
-                            item.quality = item.quality - 1;
-                        }
-                    }
-                }
-            }
-            else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
 
-                    if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                item.sellIn = item.sellIn - 1;
-            }
-            else {
-                item.quality = 80;
-            }
-
-            if (item.sellIn < 0) {
-                if (!item.name.equals("Aged Brie")) {
-                    if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (item.quality > 0) {
-                            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                                item.quality = item.quality - 1;
-                                if (item.name.equals("Conjured")){
-                                    item.quality = item.quality - 1;
-                                }
-                            }
-                        }
-                    } else {
-                        item.quality = 0;
-                    }
-                } else {
+            switch (item.name) {
+                case "Aged Brie":
+                    item.sellIn--;
                     if (item.quality < 50) {
-                        item.quality = item.quality + 1;
+                        item.quality++;
                     }
-                }
+                    if (item.sellIn < 0 && item.quality < 50) {
+                        item.quality++;
+                    }
+                    break;
+                case "Backstage passes to a TAFKAL80ETC concert":
+                    if (item.sellIn <= 0) {
+                        item.quality = 0;
+                    } else {
+                        if (item.quality < 50) {
+                            item.quality++;
+                        }
+                        if (item.sellIn < 11 && item.quality < 50) {
+                            item.quality++;
+                        }
+                        if (item.sellIn < 6 && item.quality < 50) {
+                            item.quality++;
+                        }
+                    }
+                    item.sellIn--;
+                    break;
+                case "Sulfuras, Hand of Ragnaros":
+                    item.quality = 80;
+                    break;
+                case "Conjured":
+                    item.sellIn --;
+                    if (item.quality > 0) {
+                        item.quality -= 2;
+                    }
+                    if (item.sellIn < 0 && item.quality > 0) {
+                        item.quality -= 2;
+                    }
+                    break;
+                default:
+                    item.sellIn --;
+                    if (item.quality > 0) {
+                        item.quality --;
+                    }
+                    if (item.sellIn < 0 && item.quality > 0) {
+                        item.quality --;
+                    }
+                    break;
             }
         }
     }
