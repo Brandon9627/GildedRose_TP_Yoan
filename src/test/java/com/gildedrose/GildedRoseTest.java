@@ -19,16 +19,16 @@ class GildedRoseTest {
   @Test
   @DisplayName("Test that when SellIn<0, quality decreases by 2")
   void testQualityDecreasesTwice() {
-      Item element = new Item("Any", 0, 10);
+      Item element = new Item("Any", 0, 2);
       GildedRose app = new GildedRose(new Item[] {element});
       app.updateQuality();
-      assertThat(element.quality, is(8));
+      assertThat(element.quality, is(0));
   }
 
   @Test
   @DisplayName("Test that a product's quality can never be negative")
   void testQualityAtZero() {
-      Item element = new Item("Any", 10, 0);
+      Item element = new Item("Any", 1, 0);
       GildedRose app = new GildedRose(new Item[] {element});
       app.updateQuality();
       assertThat(element.quality, is(0));
@@ -88,7 +88,14 @@ class GildedRoseTest {
       app.updateQuality();
       assertThat(element.quality, is(23));
   }
-
+  @Test
+  @DisplayName("Backstage passes, will not raise if quality is 50 ")
+  void testBackstageQualityNotRaisedMaxFifty() {
+      Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 8, 50);
+      GildedRose app = new GildedRose(new Item[] {element});
+      app.updateQuality();
+      assertThat(element.quality, is(50));
+    }
   @Test
   @DisplayName("Backstage passes, will not raise above 50 if 5 < sellin <= 10 and quality=49")
   void testBackstageQualityIncreasesLessThan2MaxFifty() {
@@ -101,7 +108,7 @@ class GildedRoseTest {
   @Test
   @DisplayName("Backstage passes, will not raise above 50 if 0 < sellin <= 5 and quality>=48")
   void testBackstageQualityIncreasesLessThan3MaxFifty() {
-        Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 48);
+        Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 1, 48);
         GildedRose app = new GildedRose(new Item[] {element});
         app.updateQuality();
         assertThat(element.quality, is(50));
@@ -119,7 +126,7 @@ class GildedRoseTest {
   @Test
   @DisplayName("Conjured will decrease by 2 with time if sellin >=0")
   void testConjuredDecreasesBy2(){
-      Item element = new Item("Conjured", 10, 40);
+      Item element = new Item("Conjured", 1, 40);
       GildedRose app = new GildedRose(new Item[] {element});
       app.updateQuality();
       assertThat(element.quality, is(38));
@@ -133,6 +140,23 @@ class GildedRoseTest {
       app.updateQuality();
       assertThat(element.quality, is(36));
   }
+  @Test
+  @DisplayName("Conjured will not decrease below zero when sellin < 0")
+  void testConjuredDecreasesBy2Max50(){
+        Item element = new Item("Conjured", 0, 2);
+        GildedRose app = new GildedRose(new Item[] {element});
+        app.updateQuality();
+        assertThat(element.quality, is(0));
+    }
+
+  @Test
+  @DisplayName("Conjured will remain the same if quality is 0")
+  void testConjuredStayZero(){
+      Item element = new Item("Conjured", 10, 0);
+      GildedRose app = new GildedRose(new Item[] {element});
+      app.updateQuality();
+      assertThat(element.quality, is(0));
+    }
 
 // ********** Tests remaining to cover the entire code **********
 
@@ -173,11 +197,20 @@ class GildedRoseTest {
 // ***** Test to complete Pitest *****
 
   @Test
-  @DisplayName("Test that normal items when SellIn<0, quality decreases by 1 if quality = 1 ")
+  @DisplayName("Test that normal items when SellIn<0, quality decreases by 1 if quality = 1")
   void testQualityDecreasesBy1MinZero() {
       Item element = new Item("Any", 0, 1);
       GildedRose app = new GildedRose(new Item[] {element});
       app.updateQuality();
       assertThat(element.quality, is(0));
   }
+
+    @Test
+    @DisplayName("Test that normal items when SellIn>0, quality decreases by 1")
+    void testQualityDecreasesBy2MinZero() {
+        Item element = new Item("Any", 1, 2);
+        GildedRose app = new GildedRose(new Item[] {element});
+        app.updateQuality();
+        assertThat(element.quality, is(1));
+    }
 }
