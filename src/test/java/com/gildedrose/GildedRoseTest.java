@@ -34,7 +34,7 @@ class GildedRoseTest {
       assertThat(element.quality, is(0));
   }
 
-  @Test  // sellin 10 was changed to 1 to complete Pitest
+  @Test
   @DisplayName("Aged Brie, Quality will increase with time")
   void testAgedBrieQualityIncreasesBy1() {
       Item element = new Item("Aged Brie", 1, 40);
@@ -70,7 +70,7 @@ class GildedRoseTest {
       assertThat(element.quality, is(21));
   }
 
-  @Test  // changed sellIn 10 to 6 to complete Pitest
+  @Test
   @DisplayName("Backstage passes, quality increases by 2 with time if 5 < sellin <= 10")
   void testBackstageQualityIncreasesBy2() {
       Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 20);

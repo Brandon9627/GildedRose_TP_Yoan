@@ -6,7 +6,7 @@ import com.gildedrose.Process;
 public class ItemList {
     Item item;
     public ItemList(Item item) {
-        this.item = item; //use inheritance from Item class
+        this.item = item;
     }
 
     public void selection(){
