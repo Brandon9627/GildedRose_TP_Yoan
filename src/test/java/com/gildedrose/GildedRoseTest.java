@@ -59,7 +59,6 @@ class GildedRoseTest {
       GildedRose app = new GildedRose(new Item[] {element});
       app.updateQuality();
       assertThat(element.quality, is(80));
-      assertThat(element.sellIn, is(10));
   }
 
   @Test

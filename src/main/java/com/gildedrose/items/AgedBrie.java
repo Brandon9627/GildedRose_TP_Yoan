@@ -1,19 +1,20 @@
 package com.gildedrose.items;
 
 import com.gildedrose.Item;
+import com.gildedrose.Process;
 
-public class AgredBrie {
+public class AgedBrie {
     Item item;
-    public AgredBrie(Item item) {
+    public AgedBrie(Item item) {
         this.item = item;
     }
     public void updateQuality(){
-        item.sellIn--;
+        Process update = new Process(item);
         if (item.quality < 50) {
-            item.quality++;
+            update.raiseQuality();
         }
         if (item.sellIn < 0 && item.quality < 50) {
-            item.quality++;
+            update.raiseQuality();
         }
-    }
+        }
 }

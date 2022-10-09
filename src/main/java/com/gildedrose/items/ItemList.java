@@ -1,18 +1,20 @@
 package com.gildedrose.items;
 
 import com.gildedrose.Item;
-import com.gildedrose.items.*;
+import com.gildedrose.Process;
 
 public class ItemList {
     Item item;
     public ItemList(Item item) {
-        this.item = item;
+        this.item = item; //use inheritance from Item class
     }
 
     public void selection(){
+        Process update = new Process(item);
+        update.timeSellIn();
         switch (item.name) {
             case "Aged Brie":
-                AgredBrie agedBrie = new AgredBrie(item);
+                AgedBrie agedBrie = new AgedBrie(item);
                 agedBrie.updateQuality();
                 break;
             case "Backstage passes to a TAFKAL80ETC concert":

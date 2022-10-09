@@ -1,6 +1,8 @@
 package com.gildedrose.items;
 
 import com.gildedrose.Item;
+import com.gildedrose.Process;
+
 
 public class Sulfuras {
     Item item;
@@ -9,6 +11,7 @@ public class Sulfuras {
     }
 
     public void updateQuality(){
-        item.quality = 80;
+        Process update = new Process(item);
+        update.setQuality(80);
     }
 }

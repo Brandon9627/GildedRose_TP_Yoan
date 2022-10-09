@@ -1,6 +1,8 @@
 package com.gildedrose.items;
 
 import com.gildedrose.Item;
+import com.gildedrose.Process;
+
 
 public class AnyItem {
     Item item;
@@ -8,12 +10,12 @@ public class AnyItem {
         this.item = item;
     }
     public void updateQuality(){
-        item.sellIn --;
+        Process update = new Process(item);
         if (item.quality > 0) {
-            item.quality --;
+            update.reduceQuality();
         }
         if (item.sellIn < 0 && item.quality > 0) {
-            item.quality --;
+            update.reduceQuality();
         }
     }
 }
