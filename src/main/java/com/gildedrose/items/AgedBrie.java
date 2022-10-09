@@ -9,12 +9,10 @@ public class AgedBrie {
         this.item = item;
     }
     public void updateQuality(){
-        Process update = new Process(item);
-        if (item.quality < 50) {
-            update.raiseQuality();
+        Process process = new Process(item);
+            process.raiseQuality(1);
+        if (process.sellInTimeBelow(0)) {
+            process.raiseQuality(1);
         }
-        if (item.sellIn < 0 && item.quality < 50) {
-            update.raiseQuality();
-        }
-        }
+    }
 }

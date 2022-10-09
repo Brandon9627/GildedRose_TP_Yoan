@@ -11,7 +11,7 @@ public class ItemList {
 
     public void selection(){
         Process update = new Process(item);
-        update.timeSellIn();
+        update.sellInTime();
         switch (item.name) {
             case "Aged Brie":
                 AgedBrie agedBrie = new AgedBrie(item);

@@ -9,20 +9,18 @@ public class BackstagePasses {
     public BackstagePasses(Item item){
         this.item = item;
     }
+
+
     public void updateQuality(){
-        Process update = new Process(item);
-        if (item.sellIn < 0) {
-            update.setQuality(0);
+        Process process = new Process(item);
+        if (process.sellInTimeAbove(10)) {
+            process.raiseQuality(1);
+        } else if (process.sellInTimeAbove(5)) {
+            process.raiseQuality(2);
+        } else if (process.sellInTimeAbove(-1)) {
+            process.raiseQuality(3);
         } else {
-            if (item.quality < 50) {
-                update.raiseQuality();
-            }
-            if (item.sellIn < 10 && item.quality < 50) {
-                update.raiseQuality();
-            }
-            if (item.sellIn < 5 && item.quality < 50) {
-                update.raiseQuality();
-            }
+            process.setQuality(0);
         }
     }
 }

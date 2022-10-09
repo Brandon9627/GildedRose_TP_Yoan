@@ -10,12 +10,10 @@ public class AnyItem {
         this.item = item;
     }
     public void updateQuality(){
-        Process update = new Process(item);
-        if (item.quality > 0) {
-            update.reduceQuality();
-        }
-        if (item.sellIn < 0 && item.quality > 0) {
-            update.reduceQuality();
+        Process process = new Process(item);
+            process.reduceQuality(1);
+        if (process.sellInTimeBelow(0)) {
+            process.reduceQuality(1);
         }
     }
 }

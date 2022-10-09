@@ -53,7 +53,7 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName("Sulfuras, sellin remains constant and quality is always set to 80")
+  @DisplayName("Sulfuras, quality is always set to 80")
   void testSulfurasQualityAndSellInConstant() {
       Item element = new Item("Sulfuras, Hand of Ragnaros", 10, 50);
       GildedRose app = new GildedRose(new Item[] {element});
@@ -64,7 +64,7 @@ class GildedRoseTest {
   @Test
   @DisplayName("Backstage passes, quality increases by 1 with time if sellin > 10")
   void testBackstageQualityIncreasesBy1() {
-      Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 11, 20);
+      Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 12, 20);
       GildedRose app = new GildedRose(new Item[] {element});
       app.updateQuality();
       assertThat(element.quality, is(21));
@@ -73,16 +73,16 @@ class GildedRoseTest {
   @Test
   @DisplayName("Backstage passes, quality increases by 2 with time if 5 < sellin <= 10")
   void testBackstageQualityIncreasesBy2() {
-      Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 20);
+      Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 11, 20);
       GildedRose app = new GildedRose(new Item[] {element});
       app.updateQuality();
       assertThat(element.quality, is(22));
   }
 
   @Test
-  @DisplayName("Backstage passes, quality increases by 3 with time if 0 < sellin <= 5")
+  @DisplayName("Backstage passes, quality increases by 3 with time if 0 <= sellin <= 5")
   void testBackstageQualityIncreasesBy3() {
-      Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20);
+      Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 20);
       GildedRose app = new GildedRose(new Item[] {element});
       app.updateQuality();
       assertThat(element.quality, is(23));
@@ -96,7 +96,7 @@ class GildedRoseTest {
       assertThat(element.quality, is(50));
     }
   @Test
-  @DisplayName("Backstage passes, will not raise above 50 if 5 < sellin <= 10 and quality=49")
+  @DisplayName("Backstage passes, will not raise above 50 if 5 <= sellin <= 10 and quality=49")
   void testBackstageQualityIncreasesLessThan2MaxFifty() {
         Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 8, 49);
         GildedRose app = new GildedRose(new Item[] {element});
@@ -105,7 +105,7 @@ class GildedRoseTest {
     }
 
   @Test
-  @DisplayName("Backstage passes, will not raise above 50 if 0 < sellin <= 5 and quality>=48")
+  @DisplayName("Backstage passes, will not raise above 50 if 0 <= sellin <= 5 and quality>=48")
   void testBackstageQualityIncreasesLessThan3MaxFifty() {
         Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 1, 48);
         GildedRose app = new GildedRose(new Item[] {element});
